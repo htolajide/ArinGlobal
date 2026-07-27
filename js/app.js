@@ -60,7 +60,7 @@ async function handleSubmit(e) {
     const { data, error } = await supabaseClient.from('enquiries').insert([formData]);
     if (error) throw error;
     
-    await fetch('https://formsubmit.co/ajax/info@arinolaglobal.com', {
+    await fetch('https://formsubmit.co/ajax/info@arinolaglobal.com.ng', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
