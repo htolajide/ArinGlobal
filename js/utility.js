@@ -1,9 +1,3 @@
-// ========== PAGE LOADER ==========
-window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hidden');
-    }, 500);
-  });
 
   // ========== SCROLL TO TOP ==========
   const scrollTopBtn = document.getElementById('scrollTop');
