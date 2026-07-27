@@ -11,14 +11,14 @@
 <body>
 
 <!-- ========== LOADER ========== -->
-<div class="loader" id="loader">
-  <div class="loader-content">
-    <div class="loader-spinner"></div>
+<div class="loader" id="loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; align-items: center; justify-content: center; z-index: 9999;">
+  <div style="text-align: center;">
+    <div style="width: 60px; height: 60px; border: 4px solid #f0f0f0; border-top-color: var(--secondary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
     <p style="color: var(--primary-color); font-weight: 600;">Loading...</p>
   </div>
 </div>
 
-<!-- ========== SCROLL TO TOP ========== -->
+  <!-- ========== SCROLL TO TOP ========== -->
 <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
   <i class="fas fa-arrow-up"></i>
 </button>
@@ -27,6 +27,30 @@
 <a href="https://wa.me/2348058831399" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
+
+<!-- ========== ADMIN LOGIN MODAL ========== -->
+<div class="admin-login" id="adminLogin">
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+    <input type="password" id="adminPassword" placeholder="Enter admin password" />
+    <button class="btn" onclick="loginAdmin()" style="width: 100%; padding: 12px;">Login</button>
+    <button onclick="closeAdminLogin()" style="width: 100%; padding: 10px; margin-top: 10px; background: #ddd; border: none; border-radius: 8px; cursor: pointer;">Cancel</button>
+  </div>
+</div>
+
+<!-- ========== ADMIN PANEL ========== -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <h1>📋 Enquiry Dashboard</h1>
+    <button class="btn-logout" onclick="logoutAdmin()">Logout</button>
+  </div>
+  <div class="enquiry-list" id="enquiryList">
+    <p style="text-align: center; color: var(--text-light);">Loading enquiries...</p>
+  </div>
+</div>
+
+<!-- ========== MAIN WEBSITE (Hidden when admin panel is active) ========== -->
+<div id="mainWebsite">
 
 <!-- ========== NAVBAR ========== -->
 <header id="header">
@@ -49,6 +73,8 @@
         <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
         <li><a href="#locations" onclick="closeMenu()">Locations</a></li>
         <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        <li><a href="#" onclick="showAdminLogin(); return false;" style="color: var(--secondary-color); font-weight: 600;">🔐 Admin</a></li>
+        </ul>
       </ul>
     </nav>
   </div>
@@ -672,8 +698,16 @@
   <img src="" alt="Gallery Image" id="lightboxImg" />
 </div>
 
+
+</div>
+
+<!-- Supabase SDK -->
+<!-- 1. CORRECT Supabase UMD Link (This fixes the crash) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/app.js"></script>
 <!-- ========== JAVASCRIPT ========== -->
-<script src="js/contact.js"></script>
+<script src="js/utility.js"></script>
+<!-- ========== JAVASCRIPT ========== -->
 
 </body>
 </html>
