@@ -168,22 +168,19 @@ function renderPagination() {
   if (totalPages <= 1) return;
 
   const paginationContainer = document.createElement('div');
-  paginationContainer.style.cssText = 'display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;';
+  paginationContainer.className = 'pagination-container';
   
   const prevBtn = document.createElement('button');
   prevBtn.textContent = '← Previous';
   prevBtn.disabled = currentPage === 1;
-  prevBtn.style.cssText = `padding: 8px 16px; border: 1px solid #ddd; border-radius: 6px; background: ${currentPage === 1 ? '#f8f9fa' : 'white'}; cursor: ${currentPage === 1 ? 'not-allowed' : 'pointer'}; color: ${currentPage === 1 ? '#aaa' : 'var(--primary-color)'}; font-weight: 600;`;
   prevBtn.onclick = () => loadEnquiries(currentPage - 1);
 
   const pageInfo = document.createElement('span');
   pageInfo.textContent = `Page ${currentPage} of ${totalPages} (${totalCount} total)`;
-  pageInfo.style.cssText = 'font-size: 0.9rem; color: var(--text-light); font-weight: 500;';
 
   const nextBtn = document.createElement('button');
   nextBtn.textContent = 'Next →';
   nextBtn.disabled = currentPage === totalPages;
-  nextBtn.style.cssText = `padding: 8px 16px; border: 1px solid #ddd; border-radius: 6px; background: ${currentPage === totalPages ? '#f8f9fa' : 'white'}; cursor: ${currentPage === totalPages ? 'not-allowed' : 'pointer'}; color: ${currentPage === totalPages ? '#aaa' : 'var(--primary-color)'}; font-weight: 600;`;
   nextBtn.onclick = () => loadEnquiries(currentPage + 1);
 
   paginationContainer.appendChild(prevBtn);
@@ -197,50 +194,49 @@ function renderPagination() {
 function createEnquiryElement(id, data) {
   const div = document.createElement('div');
   div.className = 'enquiry-item';
-  div.style.cssText = 'padding: 15px 20px; margin-bottom: 12px; border: 1px solid #e0e0e0; border-radius: 8px; background: white; transition: all 0.2s ease;';
   
   const dateObj = new Date(data.created_at);
   const dateStr = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
   
   div.innerHTML = `
-    <div class="enquiry-header" onclick="toggleEnquiryDetail('${id}')" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+    <div class="enquiry-header" onclick="toggleEnquiryDetail('${id}')">
       <div style="flex: 1;">
-        <div style="font-weight: 600; color: var(--primary-color); font-size: 1rem;">${data.name}</div>
-        <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 2px;">${data.subject} • ${dateStr}</div>
+        <div style="font-weight: 600; color: var(--primary-color); font-size: 0.95rem; margin-bottom: 2px;">${data.name}</div>
+        <div style="font-size: 0.8rem; color: var(--text-light);">${data.subject} • ${dateStr}</div>
       </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <span class="enquiry-status status-${data.status || 'new'}" style="padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; background: ${data.status === 'read' ? '#fff3cd' : '#d4edda'}; color: ${data.status === 'read' ? '#856404' : '#155724'};">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="padding: 3px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; background: ${data.status === 'read' ? '#fff3cd' : '#d4edda'}; color: ${data.status === 'read' ? '#856404' : '#155724'};">
           ${data.status || 'new'}
         </span>
-        <i class="fas fa-chevron-down" id="icon-${id}" style="color: var(--text-light); transition: transform 0.3s;"></i>
+        <i class="fas fa-chevron-down" id="icon-${id}" style="color: var(--text-light); font-size: 0.8rem; transition: transform 0.3s;"></i>
       </div>
     </div>
     
-    <div class="enquiry-detail" id="detail-${id}" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+    <div class="enquiry-detail" id="detail-${id}" style="display: none;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px;">
         <div>
-          <div style="font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 600;">Email</div>
-          <div style="font-size: 0.95rem; color: var(--text-dark); word-break: break-all;">${data.email}</div>
+          <div style="font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-weight: 600;">Email</div>
+          <div style="font-size: 0.9rem; color: var(--text-dark); word-break: break-all;">${data.email}</div>
         </div>
         <div>
-          <div style="font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 600;">Phone</div>
-          <div style="font-size: 0.95rem; color: var(--text-dark);">${data.phone}</div>
+          <div style="font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-weight: 600;">Phone</div>
+          <div style="font-size: 0.9rem; color: var(--text-dark);">${data.phone}</div>
         </div>
       </div>
       
-      <div style="margin-bottom: 15px;">
+      <div class="message-box">
         <div style="font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 600;">Message</div>
-        <div style="font-size: 0.95rem; color: var(--text-dark); background: #f8f9fa; padding: 12px; border-radius: 6px; line-height: 1.5; white-space: pre-wrap; border: 1px solid #eee;">${data.message}</div>
+        <div style="white-space: pre-wrap;">${data.message}</div>
       </div>
       
-      <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-        <button onclick="markAsRead('${id}')" class="btn" style="padding: 8px 16px; font-size: 0.85rem; background: var(--primary-color); border: none; border-radius: 6px; color: white; cursor: pointer;">
-          <i class="fas fa-check"></i> Mark as Read
+      <div class="enquiry-actions">
+        <button onclick="markAsRead('${id}')" style="background: var(--primary-color); border: none; color: white; cursor: pointer;">
+          <i class="fas fa-check"></i> Mark Read
         </button>
-        <a href="mailto:${data.email}?subject=Re: ${data.subject}" class="btn" style="padding: 8px 16px; font-size: 0.85rem; background: #25D366; color: white; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px;">
+        <a href="mailto:${data.email}?subject=Re: ${data.subject}" style="background: #25D366; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
           <i class="fas fa-reply"></i> Reply
         </a>
-        <button onclick="deleteEnquiry('${id}')" class="btn" style="padding: 8px 16px; font-size: 0.85rem; background: var(--accent-color); border: none; border-radius: 6px; color: white; cursor: pointer; margin-left: auto;">
+        <button onclick="deleteEnquiry('${id}')" style="background: var(--accent-color); border: none; color: white; cursor: pointer; margin-left: auto;">
           <i class="fas fa-trash"></i> Delete
         </button>
       </div>
