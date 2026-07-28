@@ -1112,7 +1112,7 @@
   }
   .admin-panel {
     display: none;
-    padding: 100px 20px 50px;
+    padding: 20px 20px 50px;
     background: var(--bg-light);
     min-height: 100vh;
   }
@@ -1122,7 +1122,7 @@
     margin: 0 auto;
     background: white;
     border-radius: 15px;
-    padding: 30px;
+    padding: 15px;
     box-shadow: var(--shadow-md);
   }
   .enquiry-item {
@@ -1157,8 +1157,8 @@
   .status-read { background: #fff3cd; color: #856404; }
   .enquiry-detail {
     display: none;
-    margin-top: 20px;
-    padding-top: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
     border-top: 2px solid var(--bg-light);
   }
   .enquiry-detail.active { display: block; }
@@ -1170,15 +1170,9 @@
     color: var(--primary-color);
     margin-bottom: 5px;
   }
-  .admin-header {
-    max-width: 1200px;
-    margin: 0 auto 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  
   .btn-logout {
-    padding: 10px 25px;
+    padding: 10px 15px;
     background: var(--accent-color);
     color: white;
     border: none;
@@ -1186,3 +1180,142 @@
     cursor: pointer;
     font-weight: 600;
   }
+  /* ========== STREAMLINED ADMIN PANEL ========== */
+.admin-panel {
+  display: none;
+  padding: 100px 20px 50px;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+.admin-panel.active { 
+  display: block; 
+}
+
+.admin-header {
+  max-width: 1000px;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header h1 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* Remove the container background - this fixes the "panel behind panel" issue */
+.enquiry-list {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: transparent; /* Changed from white */
+  padding: 0; /* Removed padding */
+  box-shadow: none; /* Removed shadow */
+}
+
+/* Compact enquiry items */
+.enquiry-item {
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 5px; /* Reduced from 12px */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.enquiry-item:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Compact header */
+.enquiry-header {
+  padding: 10px 12px; /* Reduced padding */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.enquiry-header:hover {
+  background: #f8f9fa;
+}
+
+/* Compact detail view */
+.enquiry-detail {
+  padding: 0 10px 10px; /* Top padding removed, only bottom */
+  border-top: 1px solid #e9ecef;
+}
+
+/* Tighter grid for email/phone */
+.enquiry-detail > div:first-child {
+  margin-bottom: 5px; /* Reduced from 15px */
+}
+
+/* Compact message box */
+.enquiry-detail .message-box {
+  background: #f8f9fa;
+  padding: 5px 8px; /* Reduced from 12px */
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 5px; /* Reduced from 15px */
+}
+
+/* Compact action buttons */
+.enquiry-actions {
+  display: flex;
+  gap: 8px; /* Reduced from 10px */
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid #e9ecef;
+}
+
+.enquiry-actions button,
+.enquiry-actions a {
+  padding: 6px 12px !important; /* Reduced from 8px 16px */
+  font-size: 0.8rem !important;
+  border-radius: 5px;
+}
+
+/* Compact pagination */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 5px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.pagination-container button {
+  padding: 6px 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  transition: all 0.2s;
+}
+
+.pagination-container button:hover:not(:disabled) {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.pagination-container button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-container span {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
